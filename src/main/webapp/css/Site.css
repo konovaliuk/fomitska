@@ -1,0 +1,201 @@
+body{
+	margin:0;
+	font-family: 'Open Sans',sans-serif;
+	font-size: 14px;
+	color: #fff;
+}
+
+.site-background {
+	position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/images/background.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 0;
+}
+
+.hotel-top-menu{
+	top: 0;
+	position: fixed;
+    height: 60px;
+    width: 100%;
+}
+
+.logo{
+	background: url(/images/hotel.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100px;
+    height: 50px;
+    margin-top: 5px;
+    display: block;
+    float: left;
+}
+
+.page-name{
+	display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+}
+
+.menu-button:hover,
+.action-button:hover{
+    background-color: #0d193a;
+}
+
+.menu-button{
+	height: 60px;
+    line-height: 60px;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: center;
+    font-size: 15px;
+    cursor: pointer;
+	float:left;
+    border-right: #ffffff 1px solid;
+}
+
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+input[type=text]:focus,
+input[type=password]:focus{
+	background-color: rgb(236, 251, 255);
+}
+
+.background-color-main{
+	background-color: #0f3d63;
+}
+
+.hotel-top-menu,
+.hotel-login{
+	box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.5);
+	z-index: 2;
+}
+
+.hotel-login,
+.registration-container{
+	background-color: rgba(0, 137, 173, 0.7);
+}
+
+.error-text-color{
+	color: #ca0000;
+}
+
+.action-button{
+    border: 0;
+	color: #fff;
+	text-align: center;
+	background-color: #0f3d63;
+	cursor: pointer;
+	height: 35px;
+}
+
+input[type=text], 
+input[type=email], 
+input[type=number], 
+input[type=password]{
+    margin: 8px 0px;
+    height: 25px;
+    border: 0;
+	border-radius: 3px;
+	padding: 0 10px;
+}
+
+.hotel-login input[type=text], 
+.hotel-login input[type=password]{
+    width: 92%;
+}
+
+.hotel-login .action-button{
+	float: right;
+    width: 90px;
+    margin-top: 15px;
+}
+
+.hotel-login{
+	position: fixed;
+    top: 60px;
+    right: 0;
+    width: 215px;
+    height: 100%;
+    padding: 30px 40px 0px;
+}
+
+.create-account-link{
+	display: block;
+    margin-top: 25px;
+    color: #fff;
+}
+
+.site-container {
+    top: 65px;
+    position: relative;
+	z-index: 1;
+}
+
+.site-element {    
+	padding: 30px;
+    margin: 20px 320px 0px 50px;
+    background-color: #fff;
+    box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.5);
+}
+
+.site-element-information {    
+    line-height: 20px;
+    overflow: auto;
+	color: #000;
+}
+
+/* Registration */
+
+.registration-container{
+	position: absolute;
+	left: 26%;
+    top: 80px;
+    width: 650px;
+	padding: 40px;
+	box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.5);
+	z-index: 1;
+	
+}
+
+.registration-field-name{
+	display: inline-block;
+    width: 170px;
+    text-align: right;
+    padding-right: 15px;
+}
+
+.registration-container input {
+	width: 215px;
+}
+
+.registration-container .action-button{
+    width: 236px;
+    margin: 30px 189px;
+}
+
+.field-error {
+	display: inline-flex;
+    width: 200px;
+    padding-left: 5px;
+    line-height: 20px;
+}
+
+.unvisible{
+	visibility: hidden;
+}
+
+/* Registration end */
+
+
+

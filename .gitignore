@@ -1,0 +1,4 @@
+'#' Ignore objects and archives.
+/.idea/
+/target/
+/nb-configuration.xml
