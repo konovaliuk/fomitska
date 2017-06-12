@@ -40,8 +40,19 @@ public abstract class AbstractDAO <K, T extends Entity> implements IDAO<K, T> {
         return executeUpdateQuery(sql);
     }
 
-    public boolean create(T entity) {
-        return executeUpdateQuery(QueryFactory.getQuery(QueryTypes.CREATE, entity));
+    public Long create(T entity) throws SQLException{
+        Long generatedKey = -1L;
+        String sql = QueryFactory.getQuery(QueryTypes.CREATE, entity);
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            statement.executeUpdate();
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                generatedKey = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            throw e;
+    }
+        return generatedKey;
     }
 
     protected List<T> executeSelectQuery(String sql) {
@@ -54,6 +65,10 @@ public abstract class AbstractDAO <K, T extends Entity> implements IDAO<K, T> {
         return null;
     }
 
+    public boolean update(T entity) {
+        return executeUpdateQuery(QueryFactory.getQuery(QueryTypes.UPDATE, entity));
+    }
+
     protected boolean executeUpdateQuery(String sql) {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
@@ -62,10 +77,6 @@ public abstract class AbstractDAO <K, T extends Entity> implements IDAO<K, T> {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public boolean update(T entity) {
-        return executeUpdateQuery(QueryFactory.getQuery(QueryTypes.UPDATE, entity));
     }
 
     abstract List<T> createEntityList(ResultSet resultSet);

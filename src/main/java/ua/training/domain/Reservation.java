@@ -10,6 +10,8 @@ public class Reservation extends Entity {
     private Room fkRoom;
 
     public Reservation() {
+        fkRoomrequest = new RoomRequest();
+        fkRoom = new Room();
     }
 
     public Reservation(Long reservationId) {
@@ -38,7 +40,7 @@ public class Reservation extends Entity {
         Reservation other = (Reservation) obj;
         if(getId() != other.getId())
             return false;
-        return fkRoomrequest.getId() == other.getFkRequest().getId()
+        return fkRoomrequest.getId() == other.getFkRoomrequest().getId()
                 && fkRoom.getId() == other.getFkRoom().getId();
     }
 
@@ -53,12 +55,16 @@ public class Reservation extends Entity {
                 + " room id: " + fkRoom.getId();
     }
 
-    public RoomRequest getFkRequest() {
+    public RoomRequest getFkRoomrequest() {
         return fkRoomrequest;
     }
 
-    public void setFkRequest(RoomRequest fkRequest) {
+    public void setFkRoomrequest(RoomRequest fkRequest) {
         this.fkRoomrequest = fkRequest;
+    }
+
+    public void setFkRoomrequest(Long fkRequest) {
+        this.fkRoomrequest = new RoomRequest(fkRequest);
     }
 
     public Room getFkRoom() {
@@ -67,6 +73,11 @@ public class Reservation extends Entity {
 
     public void setFkRoom(Long fkRoom) {
         this.fkRoom.setId(fkRoom);
+    }
+
+
+    public void setFkRoom(Room fkRoom) {
+        this.fkRoom = fkRoom;
     }
 
 }

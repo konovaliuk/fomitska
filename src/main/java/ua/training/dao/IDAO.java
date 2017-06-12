@@ -9,6 +9,6 @@ public interface IDAO <K, T extends Entity> {
     List<T> findAll();
     T findById(K id);
     boolean delete(K id);
-    boolean create(T entity);
+    Long create(T entity) throws SQLException;
     boolean update(T entity);
 }

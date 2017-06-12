@@ -1,4 +1,4 @@
-package ua.training.command;
+package ua.training.controller;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -6,16 +6,15 @@ import java.util.ResourceBundle;
 public class Message {
     private static Message instance;
     private ResourceBundle resource;
-    private Locale locale;
+    private static Locale defaultLocale = new Locale("uk", "UA");
     private static final String BUNDLE_NAME = "I18n.pagecontent";
-    public static final String SERVLET_EXECPTION = "SERVLET_EXCEPTION";
-    public static final String IO_EXCEPTION = "IO_EXCEPTION";
+    public static final String EXCEPTION = "EXCEPTION";
     public static final String LOGIN_ERROR = "LOGIN_ERROR";
 
     public static Message getInstance() {
         if (instance == null) {
             instance = new Message();
-            instance.resource = ResourceBundle.getBundle(BUNDLE_NAME);
+            instance.resource = ResourceBundle.getBundle(BUNDLE_NAME, defaultLocale);
         }
         return instance;
     }

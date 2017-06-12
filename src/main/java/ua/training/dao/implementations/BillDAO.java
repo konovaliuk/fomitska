@@ -31,9 +31,11 @@ public class BillDAO extends AbstractDAO<Long, Bill> {
         List<Bill> list = new ArrayList<>();
         try {
             while (resultSet.next()) {
-                list.add(new Bill( resultSet.getLong(1), resultSet.getLong(2),
-                        resultSet.getBigDecimal(3), resultSet.getShort(4),
-                       resultSet.getTimestamp(5), resultSet.getLong(6), resultSet.getLong(7)));
+                list.add(new Bill( resultSet.getLong(1),
+                        resultSet.getLong(2),
+                        resultSet.getLong(3),
+                        resultSet.getBigDecimal(4), resultSet.getShort(5),
+                       resultSet.getTimestamp(6)));
             }
         } catch (SQLException e) {
             e.printStackTrace();

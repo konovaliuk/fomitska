@@ -54,26 +54,14 @@ public class UserDao extends AbstractDAO<Long, User>{
         return list;
     }
 
-    public boolean isEmailUnique(String email) throws FailedOperationException {
-        if (!getUniqueAttribute("email", email)) {
-            throw new FailedOperationException("email.nonunique.exc");
-        }
-        return true;
-    }
-
-    public boolean isLoginUnigue(String login) throws FailedOperationException {
-        if (!getUniqueAttribute("login", login)) {
-            throw new FailedOperationException("login.nonunique.exc");
-        }
-       return true;
-    }
-
     public boolean getUniqueAttribute(String attribute, String value) {
-        String sql = String.format("Select count(*) from user where %1$s like '%2$s'", attribute, value);
-        int counter = -1;
+        String sql = String.format("Select count(*) as rowcount from user where %1$s like '%2$s'", attribute, value);
+        Integer counter = -1;
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
-            counter = resultSet.getInt(1);
+           while(resultSet.next()) {
+               counter = resultSet.getInt("rowcount");
+           }
             resultSet.close();
         }catch (SQLException e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package ua.training.command;
+package ua.training.controller;
 
 import java.util.ResourceBundle;
 
@@ -15,6 +15,8 @@ public class Config {
         public static final String REGISTRATION = "REGISTRATION";
         public static final String APPOINTMENT = "APPOINTMENT";
         public static final String CONGRATULATION = "CONGRATULATION";
+        public static final String BILL = "BILL";
+
 
         public static Config getInstance() {
             if (instance == null) {

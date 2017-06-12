@@ -9,12 +9,11 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Bill extends ua.training.domain.Entity {
-    private long invoiceNumber;
     private BigDecimal subtotal;
     private Short discountPercentage;
     private Timestamp creationDt;
     private User fkUser;
-    private Room fkRoom;
+    private BookingRequest fkBookingrequest;
 
     public Bill() {
     }
@@ -23,15 +22,24 @@ public class Bill extends ua.training.domain.Entity {
         super(billId);
     }
 
-    public Bill(Long billId, long invoiceNumber, BigDecimal subtotal, Short discountPercentage, Timestamp creationDt,
-    Long userId, Long roomId) {
+    public Bill(Long billId, BigDecimal subtotal, Short discountPercentage, Timestamp creationDt,
+    Long userId, Long id) {
         this(billId);
-        this.invoiceNumber = invoiceNumber;
         this.subtotal = subtotal;
         this.discountPercentage = discountPercentage;
         this.creationDt = creationDt;
         fkUser = new User(userId);
-        fkRoom = new Room(roomId);
+        fkBookingrequest = new BookingRequest(id);
+    }
+
+    public Bill(Long billId, Long userId, Long fkBookingrequest, BigDecimal subtotal,
+                Short discountPercentage, Timestamp creationDt) {
+        this(billId);
+        this.subtotal = subtotal;
+        this.discountPercentage = discountPercentage;
+        this.creationDt = creationDt;
+        fkUser = new User(userId);
+        this.fkBookingrequest = new BookingRequest(fkBookingrequest);
     }
 
     @Override
@@ -45,36 +53,34 @@ public class Bill extends ua.training.domain.Entity {
         Bill other = (Bill) obj;
         if(getId() != other.getId())
             return false;
-        if(invoiceNumber != other.getInvoiceNumber())
-            return false;
         if(!subtotal.equals(other.getSubtotal()))
                 return false;
         if(discountPercentage != other.getDiscountPercentage())
             return false;
         if(!creationDt.equals(other.getCreationDt()))
             return false;
-        return fkUser.equals(other.getFkUser()) && fkRoom.equals(other.getFkRoom());
+        return fkUser.equals(other.getFkUser()) && fkBookingrequest.equals(other.getFkBookingrequest());
     }
 
     @Override
     public int hashCode() {
-        return (int)(31 * getId() + invoiceNumber + subtotal.intValue() + discountPercentage +
+        return (int)(31 * getId() + subtotal.intValue() + discountPercentage +
                 ((creationDt == null) ? 0 : creationDt.hashCode()) + fkUser.getId());
     }
 
     @Override
     public String toString() {
-        return getClass().getName() + "@name id:" + getId() + " extra invoiceNumber:" + invoiceNumber +
+        return getClass().getName() + "@name id:" + getId() +
                 " subtotal:" + subtotal + " discount:" + discountPercentage + " date bill created:" +
                 creationDt;
     }
 
-    public long getInvoiceNumber() {
-        return invoiceNumber;
+    public BookingRequest getFkBookingrequest() {
+        return fkBookingrequest;
     }
 
-    public void setInvoiceNumber(long invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
+    public void setFkBookingrequest(BookingRequest fkBookingrequest) {
+        this.fkBookingrequest = fkBookingrequest;
     }
 
     public BigDecimal getSubtotal() {
@@ -107,14 +113,6 @@ public class Bill extends ua.training.domain.Entity {
 
     public void setFkUser(User fkUser) {
         this.fkUser = fkUser;
-    }
-
-    public Room getFkRoom() {
-        return fkRoom;
-    }
-
-    public void setFkRoom(Room fkRoom) {
-        this.fkRoom = fkRoom;
     }
 
 }

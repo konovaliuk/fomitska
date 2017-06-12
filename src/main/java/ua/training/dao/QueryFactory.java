@@ -68,7 +68,7 @@ public class QueryFactory {
                         .append(entry.getValue());
             } else {
                 request.append(entry.getKey()).append(" = ")
-                        .append(addStringOrNumber(entry.getValue()));
+                        .append(convertIntoDBValue(entry.getValue()));
             }
         }
         request.delete(request.length()-2, request.length());
@@ -81,7 +81,7 @@ public class QueryFactory {
             request.append(className).append(" (");
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 request.append(entry.getKey()).append(", ");
-                values.append(addStringOrNumber(entry.getValue()));
+                values.append(convertIntoDBValue(entry.getValue()));
             }
             values.delete((values.length()-2), (values.length())).append(" )");
             request.delete((request.length()-2), (request.length()))
@@ -113,23 +113,30 @@ public class QueryFactory {
             String word = "_" + matcher.group().toLowerCase();
             return matcher.replaceAll(word);
         }
+        if (className.contains("bookingrequest") && value.equals(ID) ) {
+            return "request_id";
+        }
         if (value.equals(ID)) {
             return String.format("%1$s_%2$s",className, ID);
         }
         return value;
     }
-
-    private static String addStringOrNumber(String unknown) {
-        Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}.*");
-        Matcher matcher = pattern.matcher(unknown);
+    private static String convertIntoDBValue(String unknown) {
+        Pattern datePattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}.*");
+        Matcher matcher = datePattern.matcher(unknown);
         if (matcher.find()) {
-            return String.format("date('%1$s')",unknown);
+            return String.format("date('%1$s'), ",unknown);
+        }
+        Pattern booleanPattern = Pattern.compile("true|false");
+        Matcher boolMatcher = booleanPattern.matcher(unknown);
+        if (boolMatcher.find()) {
+            return unknown.replaceAll("true", "1, ").replaceAll("false", "0, ");
         }
         try {
             Long.parseLong(unknown);
-            return String.format("%1$s,",unknown);
+            return String.format("%1$s, ",unknown);
         } catch (NumberFormatException e) {
-            return String.format("'%1$s',",unknown);
+            return String.format("'%1$s', ",unknown);
         }
     }
 

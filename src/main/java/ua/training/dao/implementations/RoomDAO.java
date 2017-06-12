@@ -61,7 +61,7 @@ public class RoomDAO extends AbstractDAO<Long, Room> {
     public List<Room> findFreeRooms(Timestamp dtFrom, Timestamp dtTo) {
         String condition = " where room_id not in (select room_id from room inner join reservation on room_id = fk_room" +
                 " inner join roomrequest as rr on roomrequest_id = fk_roomrequest" +
-                "inner join bookingrequest as br on bookingrequest_id = fk_bookingrequest where" +
+                " inner join bookingrequest as br on request_id = fk_bookingrequest where" +
                 " date(br.checkin_dt) >= '" + dtFrom.toString() + "' and date(br.checkout_dt) <= '" + dtTo.toString() + "')";
         return executeSelectQuery(QueryFactory.getQuery(QueryTypes.FIND_BY_ATTRIBUTE, entityName, condition));
     }

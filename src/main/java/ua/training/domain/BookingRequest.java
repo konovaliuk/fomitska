@@ -28,6 +28,10 @@ public class BookingRequest extends ua.training.domain.Entity {
         return new BookingRequest(requestId).new BookingRequestBuilder();
     }
 
+    public static BookingRequestBuilder newBuilder() {
+        return new BookingRequest().new BookingRequestBuilder();
+    }
+
     public class BookingRequestBuilder {
 
         private BookingRequestBuilder() {
@@ -38,23 +42,28 @@ public class BookingRequest extends ua.training.domain.Entity {
             return this;
         }
 
-        public BookingRequestBuilder setCheckInDt(Timestamp checkInDt) {
-            BookingRequest.this.checkinDt = checkInDt;
+        public BookingRequestBuilder setFkUser(User user) {
+            BookingRequest.this.fkUser = user;
             return this;
         }
 
-        public BookingRequestBuilder setCheckOutDt(Timestamp checkOutDt) {
-            BookingRequest.this.checkoutDt = checkOutDt;
+        public BookingRequestBuilder setCheckinDt(Timestamp checkinDt) {
+            BookingRequest.this.checkinDt = checkinDt;
+            return this;
+        }
+
+        public BookingRequestBuilder setCheckoutDt(Timestamp checkoutDt) {
+            BookingRequest.this.checkoutDt = checkoutDt;
             return this;
         }
 
         public BookingRequestBuilder setFkRating(Long fkRating) {
-            BookingRequest.this.fkRating.setId(fkRating);
+            BookingRequest.this.fkRating = new RoomRating(fkRating);
             return this;
         }
 
         public BookingRequestBuilder setFkStatus(Long fkStatus) {
-            BookingRequest.this.fkStatus.setId(fkStatus);
+            BookingRequest.this.fkStatus = new RequestStatus(fkStatus);
             return this;
         }
 
@@ -115,15 +124,11 @@ public class BookingRequest extends ua.training.domain.Entity {
         return fkStatus;
     }
 
-    public void setUserId(Long requestId) {
-        this.fkUser.setId(requestId);
-    }
-
-    public void setCheckInDt(Timestamp checkInDt) {
+    public void setCheckinDt(Timestamp checkInDt) {
         this.checkinDt = checkInDt;
     }
 
-    public void setCheckOutDt(Timestamp checkOutDt) {
+    public void setCheckoutDt(Timestamp checkOutDt) {
         this.checkoutDt = checkOutDt;
     }
 
@@ -136,7 +141,7 @@ public class BookingRequest extends ua.training.domain.Entity {
     }
 
     public void setFkStatus(Long fkStatus) {
-        this.fkStatus.setId(fkStatus);
+        this.fkStatus = new RequestStatus(fkStatus);
     }
 
     public void setFkUser(User fkUser) {

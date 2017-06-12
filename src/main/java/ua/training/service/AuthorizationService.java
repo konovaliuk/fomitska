@@ -11,6 +11,7 @@ import ua.training.domain.User;
 import ua.training.exception.FailedOperationException;
 
 import javax.security.auth.login.FailedLoginException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AuthorizationService {
@@ -81,7 +82,9 @@ public class AuthorizationService {
             }
         }
     }
-
+    public Long createPassword(Password password) throws SQLException {
+        return passwordDAO.create(password);
+    }
     private void setNewPasswordDueExpiration(String newPassword) {
 
     }

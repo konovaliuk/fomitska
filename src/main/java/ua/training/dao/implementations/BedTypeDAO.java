@@ -32,7 +32,7 @@ public class BedTypeDAO extends AbstractDAO<Long, BedType> {
         try {
             while (resultSet.next()) {
                 list.add(new BedType( resultSet.getLong(1),
-                        resultSet.getNString(2), resultSet.getBigDecimal(3)));
+                        resultSet.getNString(2)));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -32,6 +32,10 @@ public class User extends ua.training.domain.Entity{
         return new User(userId).new UserBuilder();
     }
 
+    public static UserBuilder newBuilder() {
+        return new User().new UserBuilder();
+    }
+
     public class UserBuilder {
 
         private UserBuilder() {
@@ -133,7 +137,7 @@ public class User extends ua.training.domain.Entity{
 
     @Override
     public String toString() {
-        return getClass().getName() + "@name id:" + getId() + ", login: " + login +
+        return getClass().getName() + "@name id:"  + getId() + ", login: " + login +
                 ", firstName: " + firstName + ", lastName: " + lastName;
     }
 
@@ -179,6 +183,10 @@ public class User extends ua.training.domain.Entity{
 
     public int getActive() {
         return active == true ? 1 : 0;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     public void setActive(int active) {

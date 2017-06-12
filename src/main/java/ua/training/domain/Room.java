@@ -143,4 +143,36 @@ public class Room extends ua.training.domain.Entity {
         return fkRating;
     }
 
+    public void setRoomNumber(long roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public void setSquare(long square) {
+        this.square = square;
+    }
+
+    public void setFloor(long floor) {
+        this.floor = floor;
+    }
+
+    public void setCityView(boolean cityView) {
+        this.cityView = cityView;
+    }
+
+    public void setBalcony(boolean balcony) {
+        this.balcony = balcony;
+    }
+
+    public void setExtraBed(boolean extraBed) {
+        this.extraBed = extraBed;
+    }
+
+    public void setFkBedtype(BedType fkBedtype) {
+        this.fkBedtype = fkBedtype;
+    }
+
+    public void setFkRating(RoomRating fkRating) {
+        this.fkRating = fkRating;
+    }
+
 }
