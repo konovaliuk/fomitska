@@ -1,6 +1,7 @@
 (function(){
 	$(document).ready(function(){
 		var container = $(".registration-container");
+		var actionButton = container.find(".action-button");
 		var birthDate = container.find("input[name=birthdate]");
 		var integerInputs = container.find("input[name=house], input[name=appartment]");
 		var inputs = container.find("input[type=text], input[type=email]");
@@ -37,24 +38,33 @@
 		passwords.on("blur", function(){
 			var pass = passwords[0];
 			var repeat = passwords[1];
-			if(pass.value !== repeat.value){
-				showError(this);
+			if(repeat.value != null && repeat.value.length && pass.value !== repeat.value){
+				showError(repeat);
 			}
 		});
 		
-		integerInputs.on("blur", function(){
-			if(this.value != null && this.value != "" 
-			&& Number.isNaN(Number(this.value))){
-				showError(this);
+		integerInputs.on("keypress", setOnlyDigits);
+		
+		actionButton.click(function(){
+			var isHasError = $(".fe-error:visible").length > 0;
+			if(isHasError){
+				return false;
 			}
 		});
 	});
 	
 	function showError(element){
-		$(element).next().removeClass("unvisible");
+		$(element).nextAll(".fe-error").first().show();
 	}
 	
 	function hideError(element){
-		$(element).next().addClass("unvisible");
+		$(element).nextAll(".fe-error").first().hide();
 	}
+	
+	function setOnlyDigits(e) {
+		if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+			e.preventDefault();
+		}
+	}
+	
 })();

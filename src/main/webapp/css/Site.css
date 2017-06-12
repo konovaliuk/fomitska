@@ -6,14 +6,17 @@ body{
 }
 
 .site-background {
+    background: url(../images/background.jpg) no-repeat center;
+    background-size: cover;
+    z-index: 0;
+}
+
+.site-background, 
+.window-background {
 	position: fixed;
     top: 0;
     width: 100%;
     height: 100%;
-    background: url(/images/background.jpg) no-repeat;
-    background-position: center;
-    background-size: cover;
-    z-index: 0;
 }
 
 .hotel-top-menu{
@@ -23,22 +26,37 @@ body{
     width: 100%;
 }
 
+.hotel-top-menu span,
+.logout{
+	display: inline-block;
+    line-height: 60px;
+    font-size: 16px;
+    padding: 0 5px;
+}
+
 .logo{
-	background: url(/images/hotel.png) no-repeat;
-    background-position: center;
+    background: url(../images/hotel.png) no-repeat center;
     background-size: contain;
-    width: 100px;
+    width: 85px;
     height: 50px;
     margin-top: 5px;
-    display: block;
     float: left;
 }
 
-.page-name{
-	display: inline-block;
-    height: 60px;
-    line-height: 60px;
-    font-size: 16px;
+
+.logout{
+	float: right;
+    color: #fff;
+    padding: 0px 20px;
+}
+
+.hotel-top-menu select{
+    border: 0;
+	padding-left: 23px;
+    color: #fff;
+    height: 30px;
+    width: 115px;
+	font-size: 16px;
 }
 
 .menu-button:hover,
@@ -75,6 +93,55 @@ input[type=password]:focus{
 	background-color: #0f3d63;
 }
 
+.footer{
+	position: absolute;
+	bottom: 0;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+	padding: 15px 0;
+	box-shadow: 0px -12px 25px rgba(0,0,0,0.5);
+	background-color: #011e35;
+}
+
+.footer-text{
+	margin: 0 70px;
+}
+
+
+.site-container {
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.site-element {    
+	padding: 30px;
+    margin: 20px 40px 0px;
+    background-color: #fff;
+    box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.5);
+}
+
+.site-element:first-child {    
+    margin-top: 80px;
+}
+
+.site-element:last-child {    
+    margin-bottom: 85px;
+}
+
+.site-element.last {    
+    margin-bottom: 85px;
+}
+
+.site-element-information {    
+    line-height: 20px;
+    overflow: auto;
+	color: #000;
+}
+
 .hotel-top-menu,
 .hotel-login{
 	box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.5);
@@ -91,23 +158,51 @@ input[type=password]:focus{
 }
 
 .action-button{
+    display: inline-block;
     border: 0;
-	color: #fff;
-	text-align: center;
-	background-color: #0f3d63;
-	cursor: pointer;
-	height: 35px;
+    color: #fff;
+    text-align: center;
+    background-color: #0f3d63;
+    cursor: pointer;
+    height: 35px;
+    padding: 0 20px;
 }
 
 input[type=text], 
 input[type=email], 
 input[type=number], 
-input[type=password]{
+input[type=password],
+select{
     margin: 8px 0px;
     height: 25px;
     border: 0;
 	border-radius: 3px;
 	padding: 0 10px;
+}
+
+select#language {
+	-webkit-appearance: none; 
+	-moz-appearance: none;
+	appearance: none;
+	background: url(../images/flag-min.png) 0% / 16% no-repeat #0f3d63;
+}
+
+.true-icon,
+.false-icon{
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+
+}
+
+.true-icon{
+	background: url(../images/true-icon-min.png) no-repeat;
+	background-size: contain;
+}
+
+.false-icon{
+	background: url(../images/false-icon-min.png) no-repeat;
+	background-size: contain;
 }
 
 .hotel-login input[type=text], 
@@ -117,8 +212,12 @@ input[type=password]{
 
 .hotel-login .action-button{
 	float: right;
-    width: 90px;
     margin-top: 15px;
+}
+
+.login-page .site-element {    
+    margin-left: 50px;
+    margin-right: 320px;
 }
 
 .hotel-login{
@@ -132,36 +231,17 @@ input[type=password]{
 
 .create-account-link{
 	display: block;
+	width: 110px;
     margin-top: 25px;
     color: #fff;
-}
-
-.site-container {
-    top: 65px;
-    position: relative;
-	z-index: 1;
-}
-
-.site-element {    
-	padding: 30px;
-    margin: 20px 320px 0px 50px;
-    background-color: #fff;
-    box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.5);
-}
-
-.site-element-information {    
-    line-height: 20px;
-    overflow: auto;
-	color: #000;
 }
 
 /* Registration */
 
 .registration-container{
-	position: absolute;
-	left: 26%;
-    top: 80px;
-    width: 650px;
+    position: relative;
+    margin: 80px auto;
+    width: 570px;
 	padding: 40px;
 	box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.5);
 	z-index: 1;
@@ -169,33 +249,210 @@ input[type=password]{
 }
 
 .registration-field-name{
-	display: inline-block;
+    display: inline-block;
+    float: left;
     width: 170px;
     text-align: right;
     padding-right: 15px;
+    height: 25px;
+    line-height: 28px;
 }
 
 .registration-container input {
 	width: 215px;
+    display: block;
+    margin: 0 0 12px;
 }
 
 .registration-container .action-button{
     width: 236px;
-    margin: 30px 189px;
+    margin: 30px 182px;
 }
 
 .field-error {
-	display: inline-flex;
-    width: 200px;
-    padding-left: 5px;
-    line-height: 20px;
+	display: block;
+    margin-top: -5px;
+    padding: 0 25px 5px;
+    line-height: 15px;
+    text-align: center;
 }
 
-.unvisible{
-	visibility: hidden;
+.fe-error{
+	display: none;
 }
+
 
 /* Registration end */
 
+/* Appointment */
+table{
+	color: #000;
+	text-align: center;
+}
+
+th{
+	padding: 5px 10px;
+}
+
+table.as-table{
+	border-collapse: collapse;
+}
+
+table.as-table,
+.as-table th,
+.as-table tr,
+.as-table td{
+	border: 1px solid #000;
+}
+
+td:last-child {  
+	border: 0;	
+}
+
+
+.as-table .action-button{
+	height: 25px;
+}
+
+.appointment-page .site-element{
+	display: inline-table;
+	margin-left: 15px;
+}
+
+.appointment-button{
+    height: 30px;
+    margin: 5px;
+}
+
+.bill-btn{
+	float:left;
+}
+
+.reject-btn, 
+.bill-btn{
+	margin-top: 20px; 
+}
+
+.reject-btn{
+	float:right;
+}
+
+.request-info-table{
+	width:240px;
+	text-align: left;
+}
+
+.ajax-window{
+	display:none;
+    position: absolute;
+    max-width: 1000px;
+    background-color: #fff;
+    padding: 40px;
+    z-index: 999;
+    box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.5);
+}
+
+.room-window{
+    min-width: 900px;
+	max-height: 400px;
+    overflow: auto;
+}
+
+.window-background{
+	display:none;
+	position:fixed;
+    opacity: 0.7;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 999;
+    box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.5);
+}
+
+/* Appointment end*/
+
+/* Booking*/
+.booking-request-page-list{
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+li.previous-page,
+li.next-page{
+    font-style:italic;
+}
+
+li.current-page{
+    font-weight: bold;
+}
+
+.booking-request-page-list li{
+    display: inline;
+    padding: 5px;
+}
+
+.booking-page input[type=text],
+.booking-page select,
+.room-request
+{
+    border: 1px solid #0f3d63;
+} 
+
+.booking-field span{
+	width: 125px;
+    display: inline-block;
+} 
+
+.booking-page .site-element{
+    width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.booking-page a{
+    color:#0f3d63;
+}
+
+.booking-page input[type=submit].action-button{
+    float: right;
+    margin-top: 30px;
+} 
+
+.booking-field select{
+	width: 190px;
+}
+
+.room-request {
+	background-color: #d5ebff;
+    padding: 0 20px;
+}
+
+.room-request.clone{
+	border-top: 0;
+}
+
+.room-request span{
+    display: inline-block;
+	margin-right:15px;
+}
+
+.room-request input[type=text]{
+	width: 50px;
+	margin-left:20px;
+}
+
+.room-request input[type=checkbox]{
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+.room-request .delete-request{
+    float: right;
+    margin: 10px 0 0;
+    cursor: pointer;
+}
+/* Booking end*/
 
 

@@ -3,12 +3,12 @@
     <servlet>
         <servlet-name>FrontController</servlet-name>
         <servlet-class>ua.training.controller.FrontController</servlet-class>
-
     </servlet>
     <servlet-mapping>
         <servlet-name>FrontController</servlet-name>
         <url-pattern>/FrontController</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30
@@ -17,6 +17,7 @@
     <welcome-file-list>
         <welcome-file>jsp/login.jsp</welcome-file>
     </welcome-file-list>
+
     <!--<error-page>-->
         <!--<exception-type>javax.el.PropertyNotFoundException</exception-type>-->
         <!--<location>jsp/error.jsp</location>-->
@@ -36,4 +37,17 @@
         <filter-name>filtercache</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>encodingfilter</filter-name>
+        <filter-class>ua.training.controller.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingfilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
